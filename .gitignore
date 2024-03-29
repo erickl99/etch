@@ -1,0 +1,3 @@
+.evc
+compile_commands.json
+src/*.o
