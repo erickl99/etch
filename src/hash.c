@@ -15,11 +15,11 @@ int hash_object(int argc, char *argv[]) {
   char *file_path = argv[2];
   FILE *rfp = fopen(file_path, "rb");
   if (rfp == NULL) {
-    fprintf(stderr, "File %s does not exist\n", file_path);
+    fprintf(stderr, "hash-object: File %s does not exist\n", file_path);
     return -1;
   }
   if (chdir(".evc/objects/") < 0) {
-    fprintf(stderr, "No .evc directory found. Run etch init first.\n");
+    fprintf(stderr, "hash-object: No .evc directory found. Run etch init first.\n");
     fclose(rfp);
     return -1;
   }

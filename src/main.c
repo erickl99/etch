@@ -1,8 +1,9 @@
+#include "hash.h"
+#include "cat.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
-#include "hash.h"
 
 int main(int argc, char *argv[]) {
   if (argc == 1) {
@@ -16,6 +17,11 @@ int main(int argc, char *argv[]) {
     printf("Created .evc directory\n");
   } else if (strcmp(command, "hash-object") == 0) {
     int result = hash_object(argc, argv);
+    if (result < 0) {
+      exit(1);
+    }
+  } else if (strcmp(command, "cat-file") == 0) {
+    int result = cat_file(argc, argv);
     if (result < 0) {
       exit(1);
     }
