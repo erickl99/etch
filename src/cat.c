@@ -9,13 +9,14 @@ int cat_file(int argc, char *argv[]) {
     fprintf(stderr, "cat-file: Expected hash after command.\n");
     return -1;
   }
-  chdir(".evc/objects/");
+  chdir(".etch/objects/");
   FILE *fp = fopen(argv[2], "rb");
   if (fp == NULL) {
     fprintf(stderr, "cat-file: The provided hash does not exist in the object database.\n");
     return -1;
   }
   char buffer[BUFFER_SIZE];
+  fread(buffer, 1, 5, fp);
   int bytes_read;
   while ((bytes_read = fread(buffer, 1, BUFFER_SIZE, fp)) > 0) {
     printf("%.*s", bytes_read, buffer);

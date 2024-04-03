@@ -18,8 +18,8 @@ int hash_object(int argc, char *argv[]) {
     fprintf(stderr, "hash-object: File %s does not exist\n", file_path);
     return -1;
   }
-  if (chdir(".evc/objects/") < 0) {
-    fprintf(stderr, "hash-object: No .evc directory found. Run etch init first.\n");
+  if (chdir(".etch/objects/") < 0) {
+    fprintf(stderr, "hash-object: No .etch directory found. Run etch init first.\n");
     fclose(rfp);
     return -1;
   }
@@ -44,6 +44,7 @@ int hash_object(int argc, char *argv[]) {
   new_name[2 * hash_len] = '\0';
   FILE *wfp = fopen(new_name, "wb");
   rewind(rfp);
+  fwrite("blob\0", 1, 5, wfp);
   while ((bytes_read = fread(buffer, 1, BUFFER_SIZE, rfp)) > 0) {
     fwrite(buffer, 1, bytes_read, wfp);
   }
