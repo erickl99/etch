@@ -13,3 +13,4 @@ $(exec): $(objects)
 .PHONY: clean
 clean:
 	rm build/etch src/*.o
+	rm -rf .etch

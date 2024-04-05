@@ -17,10 +17,16 @@ int main(int argc, char *argv[]) {
     mkdir(".etch/objects", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
     printf("Created .etch directory\n");
   } else if (strcmp(command, "hash-object") == 0) {
-    int result = hash_object(argc, argv);
+    if (argc < 3) {
+      fprintf(stderr, "hash-object: Expected file name after command\n");
+    }
+    char *file_hash;
+    int result = hash_file_object(argv[2], &file_hash);
     if (result < 0) {
       exit(1);
     }
+    printf("%s\n", file_hash + 5);
+    free(file_hash);
   } else if (strcmp(command, "cat-file") == 0) {
     int result = cat_file(argc, argv);
     if (result < 0) {
