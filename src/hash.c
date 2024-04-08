@@ -68,4 +68,6 @@ int hash_file_object(char *file_path, char **file_hash) {
   return 0;
 }
 
-int hash_tree_object() { return 0; }
+int hash_tree_object(char *dir_path, char **hashes, char **dir_hash) {
+  return 0;
+}
